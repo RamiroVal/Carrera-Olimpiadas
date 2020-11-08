@@ -13,21 +13,24 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.border.LineBorder;
 
 /**
- *
- * @author jesus
+ * Programa que simula una carrera olímpica por medio de barras de progreso
+ * @author Jesus
  */
-
 public class RunnerBar extends JFrame {
     private static final long serialVersionUID = 1L;
     private static int tam;
     private JButton btnGo;
-    private static JLabel [] lblNombres;
-    private static JLabel [] lblFinalistas;
-    private static JProgressBar [] bar;
+    private JLabel [] lblNombres;
+    private JLabel [] lblFinalistas;
+    private JProgressBar [] bar;
     private Color ColorPorDefecto;
     
+    /**
+     * Constructor
+     */
     public RunnerBar(){
         super("Enviador");
         setLayout(null);
@@ -45,6 +48,9 @@ public class RunnerBar extends JFrame {
         
     }
     
+    /**
+     * Se encarga de crear el panel donde estan las barras de carga
+     */
     private void creaPanelCarrera(){
         JPanel panelCarrera = new JPanel(new GridLayout(tam,1,1,11));
         panelCarrera.setBounds(200, 130, 500, 300);
@@ -61,6 +67,10 @@ public class RunnerBar extends JFrame {
         add(panelCarrera);
     }
     
+    /**
+     * Se encarga de crear el panel donde estan los nombres de los distintos países
+     * de la competición
+     */
     private void creaPanelNombres(){
         JPanel panelNombres = new JPanel(new GridLayout(tam,1,1,11));
         panelNombres.setBounds(75, 130, 90, 300);
@@ -75,6 +85,10 @@ public class RunnerBar extends JFrame {
         add(panelNombres);
     }
     
+    /**
+     * Se encarga de crear el panel donde están los países
+     * que van llegando a la meta
+     */
     private void creaPanelFinalistas(){
         JPanel panelFinalistas= new JPanel(new GridLayout(tam,1,1,1));
         panelFinalistas.setBounds(750, 130, 200, 250);
@@ -90,6 +104,9 @@ public class RunnerBar extends JFrame {
         add(panelFinalistas);
     }
     
+    /**
+     * Se encarga de los objetos que estan en el frame principal
+     */
     private void creaInterfaz(){
         JLabel lblFinalistasTitulo = new JLabel("Finalistas!!");
         JLabel lblTitulo = new JLabel("Carrera Olímpica");
@@ -106,42 +123,75 @@ public class RunnerBar extends JFrame {
         add(btnGo);
     }
 
+    /**
+     * Tiene una lista de países del cual se escogen 10 de forma aleatoria
+     * @return - Un vector con los países seleccionados
+     */
     public String[] seleccionador(){
-        String namesCountry[] = {"Argentina","Panama","Brasil","United States","Mexico","United Kingdom",
-            "Canada","Venezuela","Alemania","China","Jamaica","Somalia","Barbados","Kenia","Etiopia","Sudafrica",
-            "Australia","Japon","Uganda","Francia","Tanzania","Letonia","Honduras","Haiti","Portugal","Israel",
-            "Egipto","Russia","Tri.Tobago","Noruega"};
-        String [] country = new String[tam];
+        String namesCountry[] = {"Argentina","Panamá","Brasil","EEUU","México","Reino Unido",
+            "Canadá","Venezuela","Alemania","China","Jamaica","Somalía","Barbados","Kenia","Etiopía","Sudáfrica",
+            "Australia","Japón","Uganda","Francia","Tanzania","Letonia","Honduras","Haití","Portugal","Israel",
+            "Egipto","Rusia","Tri.Tobago","Noruega"};
+        String[] country = new String[tam];
 
-        for(int i=0;i<tam;i++){ country[i]=namesCountry[ ((int) (Math.random()*(0-29)+29)) ]; }
+        for(int i=0;i<tam;i++){ 
+            country[i] = namesCountry[(int)(Math.random() * 29)]; 
+        }
             return country;
     }
     
+    /**
+     * Getter
+     * @return - JButton Go
+     */
     public JButton getBtnGo(){
         return btnGo;
     }
     
+    /**
+     * Getter
+     * @return - int tam
+     */
     public int getTam(){
         return tam;
     }
     
+    /**
+     * Getter
+     * @return - JLabel lblNombres
+     */
     public JLabel[] getLblNombres(){
         return lblNombres;
     }
     
+    /**
+     * Getter
+     * @return - JProgressBar bar
+     */
     public JProgressBar[] getBar(){
         return bar;
     }
     
+    /**
+     * Getter
+     * @return - Color ColorPorDefecto
+     */
     public Color getColorPorDefecto(){
         return ColorPorDefecto;
     }
     
+    /**
+     * Getter
+     * @return - JLabel lblFinalistas
+     */
     public JLabel[] getLblFinalistas(){
         return lblFinalistas;
     }
     
-
+    /**
+     * Main
+     * @param args 
+     */
     public static void main(String [] args){
         new RunnerBar().setVisible(true);
     }

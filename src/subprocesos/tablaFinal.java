@@ -1,61 +1,74 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package subprocesos;
 
+import Interfaz.RunnerBar;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.SwingWorker;
 
 /**
- *
+ * Clase que extiende de SwingWorker
+ * se encarga de mostrar los ganadores
+ * en el pánel correspondiente
  * @author jesus
  */
-public class tablaFinal extends Thread{
-    public JLabel [] finalistas;
-    public Hilos [] hilos;
-    //public HilosColorXpais [] hilos;
-    int tam;
-    public JButton go;
+public class tablaFinal extends SwingWorker<Void, Object>{
 
-    //public tablaFinal(JLabel[] finalistas,HilosColorXpais [] hilos, int tam, JButton go)
-    public tablaFinal(JLabel[] finalistas,Hilos [] hilos, int tam, JButton go)
+    private RunnerBar frame;
+    private Hilos[] hilos;
+
+    /**
+     * Constructor
+     * @param frame - Se utiliza para hacer referencia a otros objetos
+     * @param hilos - Se utiliza para saber qué barra de progreso ha terminado
+     */
+    public tablaFinal(RunnerBar frame, Hilos[] hilos)
     {
-        this.go = go;
-        this.finalistas= new JLabel[tam];
-        this.finalistas=finalistas;
+        this.frame = frame;
         this.hilos = hilos;
-        this.tam=tam;
     }
 
-    public void run() {
-        Font s = finalistas[0].getFont();
-        int x=0;
-        while(x<10){
-            for(int i=0;i<tam;i++){
-                if(hilos[i].yaFinalizo()!=null){
+    /**
+     * Método de SwingWorker
+     * @return - void
+     */
+    public Void doInBackground() {
+        int x = 0;
+        while(x < 10){
+            for(int i = 0; i < frame.getTam(); i++){
+                if(hilos[i].yaFinalizo() != null){
 
-                    if(x==0){
-                        finalistas[x].setForeground(Color.ORANGE);
-                        finalistas[x].setFont(new Font(s+"",Font.BOLD,24)); }
+                    if(x == 0){
+                        frame.getLblFinalistas()[x].setForeground(Color.ORANGE);
+                        frame.getLblFinalistas()[x].setFont(new Font("Calibri", Font.BOLD,24)); 
+                    }
 
-                    if(x==1){
-                        finalistas[x].setForeground(Color.GRAY);
-                        finalistas[x].setFont(new Font(s+"",Font.BOLD,19)); }
+                    if(x == 1){
+                        frame.getLblFinalistas()[x].setForeground(Color.GRAY);
+                        frame.getLblFinalistas()[x].setFont(new Font("Calibri", Font.BOLD,19)); 
+                    }
 
-                    if(x==2){
-                        finalistas[x].setForeground(new Color(159, 80, 0));
-                        finalistas[x].setFont(new Font(s+"",Font.BOLD,16)); }
+                    if(x == 2){
+                        frame.getLblFinalistas()[x].setForeground(new Color(159, 80, 0));
+                        frame.getLblFinalistas()[x].setFont(new Font("Calibri", Font.BOLD,16)); 
+                    }
 
-                    finalistas[x].setText((x+1)+". "+ hilos[i].yaFinalizo());
+                    frame.getLblFinalistas()[x].setText((x + 1) + ". " + hilos[i].yaFinalizo());
                     hilos[i].stopFinalizo();
                     x++;
                 }
             }
         }
-        go.setEnabled(true);
+        
+        return null;
     }
+    
+    /**
+     * Método done de SwingWorker, se encarga de avilitar el botón Go
+     */
+    public void done(){
+        frame.getBtnGo().setEnabled(true);
+    }
+
 }

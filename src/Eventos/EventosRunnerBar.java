@@ -12,7 +12,8 @@ import java.awt.event.ActionListener;
 
 
 /**
- *
+ * Clase encargada de manejar los eventos de RunnerBar implementa
+ * AtionListener
  * @author jesus
  */
 public class EventosRunnerBar implements ActionListener{
@@ -23,6 +24,10 @@ public class EventosRunnerBar implements ActionListener{
         this.frame = frame;
     }
     
+    /**
+     * Método ationPerformed para el manejo de eventos
+     * @param e 
+     */
     @Override
     public void actionPerformed(ActionEvent e){
         int tam = frame.getTam();
@@ -41,18 +46,18 @@ public class EventosRunnerBar implements ActionListener{
             frame.getLblNombres()[i].setText(country[i]);
         }
 
-            Hilos [] hilos = new Hilos[tam];
+        Hilos[] hilos = new Hilos[tam];
 
-            for(int i = 0; i < tam; i++){
-                hilos[i] = new Hilos(frame.getBar()[i], country[i],i); 
-            }
+        for(int i = 0; i < tam; i++){
+            hilos[i] = new Hilos(frame.getBar()[i], country[i], i); 
+        }
             
-            for(int i = 0; i < tam; i++){
-                hilos[i].start();
-            }
+        for(int i = 0; i < tam; i++){
+            hilos[i].execute();
+        }
 
-            tablaFinal fin = new tablaFinal(frame.getLblFinalistas(), hilos, tam, frame.getBtnGo());
-            fin.start();
+        tablaFinal fin = new tablaFinal(frame, hilos);
+        fin.execute();
         
     }
     
