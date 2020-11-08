@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Eventos;
 
 import Interfaz.RunnerBar;
+import java.awt.Color;
 import subprocesos.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 /**
@@ -16,9 +14,9 @@ import java.awt.event.ActionListener;
  * AtionListener
  * @author jesus
  */
-public class EventosRunnerBar implements ActionListener{
+public class EventosRunnerBar extends MouseAdapter implements ActionListener{
     
-    private RunnerBar frame;
+    private final RunnerBar frame;
     
     public EventosRunnerBar(RunnerBar frame){
         this.frame = frame;
@@ -35,7 +33,6 @@ public class EventosRunnerBar implements ActionListener{
         for(int i = 0; i < tam; i++){
             frame.getLblFinalistas()[i].setText("");
             frame.getBar()[i].setStringPainted(true);
-            frame.getBar()[i].setForeground(frame.getColorPorDefecto());
             frame.getBar()[i].setString("");
         }
 
@@ -59,6 +56,17 @@ public class EventosRunnerBar implements ActionListener{
         tablaFinal fin = new tablaFinal(frame, hilos);
         fin.execute();
         
+    }
+    
+    @Override
+    public void mouseEntered(MouseEvent e){
+        frame.getBtnGo().setBackground(new Color(128, 128, 128));
+        
+    }
+    
+    @Override
+    public void mouseExited(MouseEvent e){
+        frame.getBtnGo().setBackground(new Color(69, 69, 69));
     }
     
 }

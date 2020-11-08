@@ -3,8 +3,6 @@ package subprocesos;
 import Interfaz.RunnerBar;
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.SwingWorker;
 
 /**
@@ -15,8 +13,8 @@ import javax.swing.SwingWorker;
  */
 public class tablaFinal extends SwingWorker<Void, Object>{
 
-    private RunnerBar frame;
-    private Hilos[] hilos;
+    private final RunnerBar frame;
+    private final Hilos[] hilos;
 
     /**
      * Constructor
@@ -33,6 +31,7 @@ public class tablaFinal extends SwingWorker<Void, Object>{
      * Método de SwingWorker
      * @return - void
      */
+    @Override
     public Void doInBackground() {
         int x = 0;
         while(x < 10){
@@ -67,6 +66,7 @@ public class tablaFinal extends SwingWorker<Void, Object>{
     /**
      * Método done de SwingWorker, se encarga de avilitar el botón Go
      */
+    @Override
     public void done(){
         frame.getBtnGo().setEnabled(true);
     }

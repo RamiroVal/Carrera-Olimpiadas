@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package subprocesos;
 
 import java.awt.Color;
 import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
-import javax.swing.border.LineBorder;
 
 /**
  * Clase que se encarga de aumentar las distintas 
@@ -16,10 +10,11 @@ import javax.swing.border.LineBorder;
  * @author jesus
  */
 public class Hilos extends SwingWorker<Void, Object>{
-    private JProgressBar bar;
-    private String pais,fin=null;
-    private int colors;
-    private Color [] colores={Color.BLUE, Color.CYAN, Color.GRAY,
+    private final JProgressBar bar;
+    private final String pais;
+    private String fin = null;
+    private final int colors;
+    private final Color [] colores={Color.BLUE, Color.CYAN, new Color(72, 210, 148),
     Color.GREEN, Color.MAGENTA, Color.ORANGE,
     Color.PINK, Color.RED, Color.DARK_GRAY, Color.YELLOW};
 
