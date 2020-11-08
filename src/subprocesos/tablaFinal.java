@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interfaz;
+package subprocesos;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,7 +14,7 @@ import javax.swing.JLabel;
  *
  * @author jesus
  */
-class tablaFinal extends Thread{
+public class tablaFinal extends Thread{
     public JLabel [] finalistas;
     public Hilos [] hilos;
     //public HilosColorXpais [] hilos;
